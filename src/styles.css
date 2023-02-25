@@ -1,4 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Arial, Roboto, "Helvetica Neue", sans-serif;
+  color: #404C51;
+ }
+
+ label {
+  font-weight: bold;
+ }
+
+ @media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+    margin: 0 auto;
+    }
+}
+
+.label {
+  margin: 0.5em;
+}
