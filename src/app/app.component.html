@@ -11,11 +11,11 @@
     </div>
 
     <div class="col-12">
-      <label class="block">Vencimento</label>
-      <input pInputText type="text" style="width: 110px">
+      <label style="display: block">Vencimento</label>
+      <input pInputText type="text" style="width: 105px">
 
       <label class="label">até</label>
-      <input pInputText type="text" style="width: 110px">
+      <input pInputText type="text" style="width: 105px">
     </div>
 
     <div class="col-12">
@@ -26,7 +26,7 @@
 
   <div class="grid">
     <div class="col-12">
-      <p-table [value]="lancamentos">
+      <p-table [value]="lancamentos" [paginator]="true" [rows]="5">
         <ng-template pTemplate="header">
           <tr>
             <th>Pessoa</th>
@@ -34,6 +34,7 @@
             <th class="col-data-header">Vencimento</th>
             <th class="col-data-header">Pagamento</th>
             <th class="col-valor-header">Valor</th>
+            <th class="col-acoes-header"></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-lancamento>
@@ -51,8 +52,6 @@
         </ng-template>
       </p-table>
     </div>
-    <div class="col-12">
-      <a pButton label="Novo lançamento"></a>
-    </div>
   </div>
+  <a pButton label="Novo lançamento"></a>
 </div>
