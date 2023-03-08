@@ -47,6 +47,10 @@ label {
   margin-right: 5px;
 }
 
+.p-button {
+margin-right: 0.25em !important;
+}
+
 @media (min-width: 40em) {
   .col-valor-header {
     width: 120px;
@@ -73,7 +77,17 @@ label {
     text-align: center !important;
   }
 
-  .col-acoes .p-button {
-    margin: 1px;
-  }
+}
+
+a {
+text-decoration: none;
+}
+
+a:hover, a:focus {
+text-decoration: underline;
+}
+
+a.p-button:hover,
+a.p-button:focus {
+text-decoration: none;
 }
