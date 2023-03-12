@@ -25,17 +25,16 @@ import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-ca
   imports: [
     CommonModule,
     FormsModule,
-    ButtonModule,
+
+    InputNumberModule,
     InputTextModule,
+    ButtonModule,
     TableModule,
     TooltipModule,
     InputTextareaModule,
     CalendarModule,
     SelectButtonModule,
-    DropdownModule,
-    InputNumberModule
-
-
+    DropdownModule
   ],
   exports: [
     LancamentoCadastroComponent,
