@@ -1,5 +1,5 @@
-import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -16,13 +16,15 @@ import { PessoasModule } from './pessoas/pessoas.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    HttpClientModule,
 
     CoreModule,
     LancamentosModule,
     PessoasModule
   ],
-  providers: [],
+  providers: [
+    DatePipe,
+    { provide: LOCALE_ID, useValue: 'pt-BR' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
