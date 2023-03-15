@@ -8,17 +8,17 @@
 
       <div class="col-12 p-fluid">
         <label>Descrição</label>
-        <input pInputText type="text" name="descricao" [(ngModel)]="descricao">
+        <input pInputText type="text" name="descricao" [(ngModel)]="filtro.descricao">
       </div>
 
       <div class="col-12">
         <label style="display: block">Vencimento</label>
         <p-calendar dateFormat="dd/mm/yy" [inputStyle]="{ width: '105px' }" name="vencimentoInicio"
-          [(ngModel)]="dataVencimentoInicio" [showIcon]="true"></p-calendar>
+          [(ngModel)]="filtro.dataVencimentoInicio" [showIcon]="true"></p-calendar>
 
         <label class="label">até</label>
         <p-calendar dateFormat="dd/mm/yy" [inputStyle]="{ width: '105px' }" name="vencimentoFim"
-          [(ngModel)]="dataVencimentoFim" [showIcon]="true"></p-calendar>
+          [(ngModel)]="filtro.dataVencimentoFim" [showIcon]="true"></p-calendar>
       </div>
 
       <div class="col-12">

@@ -2,10 +2,12 @@ import { DatePipe } from '@angular/common';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-export interface LancamentoFiltro {
-  descricao?: string
-  dataVencimentoInicio?: Date,
+export class LancamentoFiltro {
+  descricao?: string;
+  dataVencimentoInicio?: Date;
   dataVencimentoFim?: Date;
+  pagina = 0;
+  itensPorPagina =5 ;
 }
 
 @Injectable({
@@ -13,7 +15,7 @@ export interface LancamentoFiltro {
 })
 export class LancamentoService {
 
-  lancamentosUrl = 'http://localhost:8080/api/v1/lancamentos';
+  lancamentosUrl = 'http://localhost:8080/api/v1/launchies';
 
   constructor(
     private http: HttpClient,
@@ -24,7 +26,9 @@ export class LancamentoService {
     const headers = new HttpHeaders()
       .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
-    let params = new HttpParams();
+      let params = new HttpParams()
+      .set('page', filtro.pagina)
+      .set('size', filtro.itensPorPagina);
 
 
     if (filtro.descricao) {
@@ -39,8 +43,17 @@ export class LancamentoService {
       params = params.set('dataVencimentoAte', this.datePipe.transform(filtro.dataVencimentoFim, 'yyyy-MM-dd')!);
     }
 
-    return this.http.get(`${this.lancamentosUrl}?resumo`, { headers, params })
+    return this.http.get(`${this.lancamentosUrl}?summary`, { headers, params })
       .toPromise()
-      .then((response: any) => response['content']);
+      .then((response: any) => {
+        const lancamentos = response['content'];
+
+        const resultado = {
+          lancamentos,
+          total: response['totalElements']
+        };
+
+        return resultado;
+      });
   }
 }
