@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { LazyLoadEvent } from 'primeng/api';
+import { LazyLoadEvent, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 
 import { LancamentoFiltro, LancamentoService } from './../lancamento.service';
@@ -19,7 +19,9 @@ export class LancamentosPesquisaComponent implements OnInit {
   lancamentos: any[] = [];
   @ViewChild('tabela') grid!: Table;
 
-  constructor(private lancamentoService: LancamentoService) { }
+  constructor(
+    private lancamentoService: LancamentoService,
+    private messageService: MessageService) { }
 
   ngOnInit() {
   }
@@ -42,7 +44,13 @@ export class LancamentosPesquisaComponent implements OnInit {
   excluir(lancamento: any) {
     this.lancamentoService.excluir(lancamento.id)
       .then(() => {
-        this.grid.reset();
+        if (this.grid.first === 0) {
+          this.pesquisar();
+        } else {
+          this.grid.reset();
+        }
+
+        this.messageService.add({ severity: 'success', detail: 'Lançamento excluído com sucesso!' })
       })
   }
 }

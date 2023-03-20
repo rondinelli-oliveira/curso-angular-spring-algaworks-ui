@@ -1,7 +1,10 @@
 import { DatePipe } from '@angular/common';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+
+import { ToastModule } from 'primeng/toast';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MessageService } from 'primeng/api';
 
 import { AppComponent } from './app.component';
 
@@ -19,9 +22,12 @@ import { PessoasModule } from './pessoas/pessoas.module';
 
     CoreModule,
     LancamentosModule,
-    PessoasModule
+    PessoasModule,
+
+    ToastModule
   ],
   providers: [
+    MessageService,
     DatePipe,
     { provide: LOCALE_ID, useValue: 'pt-BR' }
   ],
