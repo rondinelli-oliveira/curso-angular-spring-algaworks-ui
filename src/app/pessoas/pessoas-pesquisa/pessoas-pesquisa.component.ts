@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
-import { LazyLoadEvent } from 'primeng/api';
+import { Component, ViewChild } from '@angular/core';
+import { ErrorHandlerService } from 'src/app/core/error-handler.service';
+
+import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
+import { Table } from 'primeng/table';
 
 import { PessoaFiltro, PessoaService } from '../pessoa.service';
 
@@ -13,7 +16,13 @@ export class PessoasPesquisaComponent {
   filtro = new PessoaFiltro()
   pessoas: any[] = [];
 
-  constructor(private pessoaService: PessoaService) { }
+  @ViewChild('tabela') grid!: any;
+
+  constructor(
+    private pessoaService: PessoaService,
+    private errorHandler: ErrorHandlerService,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService) { }
 
   pesquisar(pagina: number = 0): void {
     this.filtro.pagina = pagina;
@@ -28,5 +37,25 @@ export class PessoasPesquisaComponent {
   aoMudarPagina(event: LazyLoadEvent) {
     const pagina = event!.first! / event!.rows!;
     this.pesquisar(pagina);
+  }
+
+  confirmarExclusao(pessoa: any): void {
+    this.confirmationService.confirm({
+      message: 'Tem certeza que deseja excluir?',
+      accept: () => {
+        this.excluir(pessoa);
+      }
+    });
+  }
+
+  excluir(pessoa: any) {
+    this.pessoaService.excluir(pessoa.id)
+      .then(() => {
+        this.grid.reset();
+
+        this.messageService.add({ severity: 'success', detail: 'Pessoa excluída com sucesso!' })
+      })
+
+      .catch(erro => this.errorHandler.handle(erro));
   }
 }
