@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { CategoriaService } from 'src/app/categorias/categoria.service';
+import { ErrorHandlerService } from 'src/app/core/error-handler.service';
+
 @Component({
   selector: 'app-lancamento-cadastro',
   templateUrl: './lancamento-cadastro.component.html',
@@ -7,15 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LancamentoCadastroComponent implements OnInit {
 
+  categorias: any[] = [];
+
   tipos = [
     { label: 'Receita', value: 'RECEITA' },
     { label: 'Despesa', value: 'DESPESA' }
   ]
-
-  categorias = [
-    { label: 'Alimentação', value: 1 },
-    { label: 'Transporte', value: 2 }
-  ];
 
   pessoas = [
     { label: 'João da Silva', value: 1 },
@@ -23,9 +23,21 @@ export class LancamentoCadastroComponent implements OnInit {
     { label: 'Maria Abadia', value: 3 }
   ];
 
-  constructor() { }
+  constructor(
+    private categoriaService: CategoriaService,
+    private errorHandler: ErrorHandlerService
+  ) { }
 
   ngOnInit(): void {
+    this.carregarCategorias()
+  }
+
+  carregarCategorias() {
+    return this.categoriaService.listarTodas()
+      .then(categorias => {
+        this.categorias = categorias.map((c: any) => ({ label: c.nome, value: c.id }));
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
 }
