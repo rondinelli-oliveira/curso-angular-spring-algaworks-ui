@@ -27,15 +27,15 @@ export class PessoaCadastroComponent implements OnInit {
   ngOnInit() {
   }
 
-  salvar(form: NgForm) {
-    this.pessoaService.adicionar(this.pessoa)
-      .then(() => {
-        this.messageService.add({ severity: 'success', detail: 'Pessoa adicionada com sucesso!' });
+  // salvar(form: NgForm) {
+  //   this.pessoaService.adicionar(this.pessoa)
+  //     .then(() => {
+  //       this.messageService.add({ severity: 'success', detail: 'Pessoa adicionada com sucesso!' });
 
-        form.reset();
-        this.pessoa = new Pessoa();
-      })
-      .catch(erro => this.errorHandler.handle(erro));
-  }
+  //       form.reset();
+  //       this.pessoa = new Pessoa();
+  //     })
+  //     .catch(erro => this.errorHandler.handle(erro));
+  // }
 
 }

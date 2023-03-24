@@ -71,12 +71,12 @@ export class PessoaService {
       .toPromise();
   }
 
-  adicionar(pessoa: Pessoa): Promise<Pessoa> {
-    const headers = new HttpHeaders()
-      .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
-      .append('Content-Type', 'application/json');
+  // adicionar(pessoa: Pessoa): Promise<Pessoa> {
+  //   const headers = new HttpHeaders()
+  //     .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
+  //     .append('Content-Type', 'application/json');
 
-    return this.http.post<Pessoa>(this.pessoasUrl, pessoa, { headers })
-      .toPromise();
-  }
+  //   return this.http.post<Pessoa>(this.pessoasUrl, pessoa, { headers })
+  //     .toPromise();
+  // }
 }

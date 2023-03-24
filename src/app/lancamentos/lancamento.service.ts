@@ -67,12 +67,12 @@ export class LancamentoService {
       .toPromise();
   }
 
-  adicionar(lancamento: Lancamento): Promise<Lancamento> {
-    const headers = new HttpHeaders()
-      .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
-      .append('Content-Type', 'application/json');
+  // adicionar(lancamento: Lancamento): Promise<Lancamento> {
+  //   const headers = new HttpHeaders()
+  //     .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
+  //     .append('Content-Type', 'application/json');
 
-    return this.http.post<Lancamento>(this.lancamentosUrl, lancamento, { headers })
-      .toPromise();
-  }
+  //   return this.http.post<Lancamento>(this.lancamentosUrl, lancamento, { headers })
+  //     .toPromise();
+  // }
 }
