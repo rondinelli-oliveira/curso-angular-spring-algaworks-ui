@@ -37,11 +37,26 @@ export class LancamentoCadastroComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    const idLancamento = this.route.snapshot.params['id'];
 
-    console.log(this.route.snapshot.params['id']);
+    if (idLancamento) {
+      this.carregarLancamento(idLancamento)
+    }
 
     this.carregarCategorias()
     this.carregarPessoas()
+  }
+
+  get editando() {
+    return Boolean(this.lancamento.id)
+  }
+
+  carregarLancamento(id: number) {
+    this.lancamentoService.buscarPorId(id)
+      .then(lancamento => {
+        this.lancamento = lancamento;
+      },
+        erro => this.errorHandler.handle(erro));
   }
 
   carregarCategorias() {
