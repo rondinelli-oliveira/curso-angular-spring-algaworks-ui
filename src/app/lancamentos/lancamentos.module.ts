@@ -41,9 +41,6 @@ import { HttpClientModule } from '@angular/common/http';
 
     SharedModule
   ],
-  exports: [
-    LancamentoCadastroComponent,
-    LancamentosPesquisaComponent
-  ]
+  exports: []
 })
 export class LancamentosModule { }
