@@ -1,4 +1,3 @@
-import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +16,7 @@ import { SharedModule } from '../shared/shared.module';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LancamentosRoutingModule } from './lancamentos-routing.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,6 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     FormsModule,
     HttpClientModule,
-    RouterModule,
 
     InputNumberModule,
     InputTextModule,
@@ -39,7 +38,8 @@ import { HttpClientModule } from '@angular/common/http';
     SelectButtonModule,
     DropdownModule,
 
-    SharedModule
+    SharedModule,
+    LancamentosRoutingModule
   ],
   exports: []
 })
