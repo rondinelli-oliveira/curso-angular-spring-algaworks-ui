@@ -1,9 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
-import { ErrorHandlerService } from 'src/app/core/error-handler.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
-import { Table } from 'primeng/table';
 
+import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { PessoaFiltro, PessoaService } from '../pessoa.service';
 
 @Component({
@@ -11,18 +11,23 @@ import { PessoaFiltro, PessoaService } from '../pessoa.service';
   templateUrl: './pessoas-pesquisa.component.html',
   styleUrls: ['./pessoas-pesquisa.component.css']
 })
-export class PessoasPesquisaComponent {
+export class PessoasPesquisaComponent implements OnInit {
   totalRegistros = 0;
   filtro = new PessoaFiltro()
   pessoas: any[] = [];
-
   @ViewChild('tabela') grid!: any;
 
   constructor(
     private pessoaService: PessoaService,
-    private errorHandler: ErrorHandlerService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService) { }
+    private errorHandler: ErrorHandlerService,
+    private confirmationService: ConfirmationService,
+    private title: Title
+  ) { }
+
+  ngOnInit() {
+    this.title.setTitle('Pesquisa de pessoas');
+  }
 
   pesquisar(pagina: number = 0): void {
     this.filtro.pagina = pagina;
@@ -49,13 +54,29 @@ export class PessoasPesquisaComponent {
   }
 
   excluir(pessoa: any) {
-    this.pessoaService.excluir(pessoa.id)
+
+    this.pessoaService.excluir(pessoa.codigo)
+      .then(
+        () => {
+          this.grid.reset();
+
+          this.messageService.add({ severity: 'success', detail: 'Pessoa excluída com sucesso!' })
+        }
+      )
+      .catch((error) => this.errorHandler.handle(error))
+
+  }
+
+  alternarStatus(pessoa: any): void {
+    const novoStatus = !pessoa.ativo;
+
+    this.pessoaService.mudarStatus(pessoa.codigo, novoStatus)
       .then(() => {
-        this.grid.reset();
+        const acao = novoStatus ? 'ativada' : 'desativada';
 
-        this.messageService.add({ severity: 'success', detail: 'Pessoa excluída com sucesso!' })
+        pessoa.ativo = novoStatus;
+        this.messageService.add({ severity: 'success', detail: `Pessoa ${acao} com sucesso!` });
       })
-
       .catch(erro => this.errorHandler.handle(erro));
   }
 }

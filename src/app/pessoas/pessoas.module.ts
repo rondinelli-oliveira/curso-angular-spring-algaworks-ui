@@ -11,6 +11,7 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { SharedModule } from './../shared/shared.module';
 import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.component';
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
+import { PessoasRoutingModule } from './pessoas-routing.module';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.compo
     InputMaskModule,
 
     SharedModule,
+    PessoasRoutingModule
   ],
   exports: []
 })
