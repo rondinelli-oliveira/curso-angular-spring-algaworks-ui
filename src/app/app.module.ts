@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { PessoasModule } from './pessoas/pessoas.module';
+import { SegurancaModule } from './seguranca/seguranca.module';
 
 const routes: Routes = [];
 
@@ -25,6 +26,8 @@ const routes: Routes = [];
     CoreModule,
     LancamentosModule,
     PessoasModule,
+    SegurancaModule,
+
     AppRoutingModule
   ],
   providers: [],
