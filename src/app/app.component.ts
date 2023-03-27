@@ -12,15 +12,15 @@ export class AppComponent implements OnInit {
   title = 'algamoney-ui';
 
   constructor(
-    private config: PrimeNGConfig,
-    private translateService: TranslateService,
+    // private config: PrimeNGConfig,
+    // private translateService: TranslateService,
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.translateService.setDefaultLang('pt');
-    this.translateService.get('primeng')
-      .subscribe(res => this.config.setTranslation(res));
+    // this.translateService.setDefaultLang('pt');
+    // this.translateService.get('primeng')
+    //   .subscribe(res => this.config.setTranslation(res));
   }
 
   exibindoNavbar() {
